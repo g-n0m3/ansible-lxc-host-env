@@ -1,0 +1,69 @@
+---
+- hosts: all
+  become_user: root
+  become_method: sudo
+  tasks:
+    # Create a container using overlayfs, create an archive of it, create a
+    # snapshot clone of the container and and finally leave the container
+    # in a frozen state. The container archive will be compressed using gzip.
+    # -- Straight outta Docston -- Ansible Docs son --
+    - name: Create an overlayfs container archive and clone it
+      lxc_container:
+        name: test-container-overlayfs
+        container_log: true
+        template: ubuntu
+        state: started
+        backing_store: overlayfs
+        template_options: --release trusty
+        clone_snapshot: true
+        clone_name: test-container-overlayfs-clone-snapshot
+        archive: true
+        archive_compression: gzip
+        register: true 
+
+    - name: debug info on container "test-container"
+      debug: var=clone_container_info
+
+    - name: Clone a container using snapshot
+      lxc_container:
+        name: test-container-overlayfs-clone-snapshot
+        backing_store: overlayfs
+        clone_name: test-container-overlayfs-clone-snapshot2
+        clone_snapshot: true
+
+    - name: Create a new container and clone it
+      lxc_container:
+        name: test-container-new-archive
+        backing_store: dir
+        clone_name: test-container-new-archive-clone
+
+    - name: Archive and clone a container then destroy it
+      lxc_container:
+        name: test-container-new-archive
+        state: absent
+        clone_name: test-container-new-archive-destroyed-clone
+        archive: true
+        archive_compression: gzip
+
+    - name: Start a cloned container.
+      lxc_container:
+        name: test-container-new-archive-destroyed-clone
+        state: started
+
+    - name: Destroy a container
+      lxc_container:
+        name: "{{ item }}"
+        state: absent
+        with_items:
+          - test-container-stopped
+          - test-container-started
+          - test-container-frozen
+          - test-container-lvm
+          - test-container-config
+          - test-container-overlayfs
+          - test-container-overlayfs-clone
+          - test-container-overlayfs-clone-snapshot
+          - test-container-overlayfs-clone-snapshot2
+          - test-container-new-archive
+          - test-container-new-archive-clone
+          - test-container-new-archive-destroyed-clone
