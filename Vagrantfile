@@ -29,6 +29,7 @@ Vagrant.configure(2) do |config|
   
   # Run Ansible from the Vagrant Host
   config.vm.provision "ansible" do |ansible|
+    
     ansible.playbook = "provisioning/ansible/plays/play-with-lxc.yml"
 #   ansible.playbook = "provisioning/ansible/plays/play-with-ruby.yml"
 #   ansible.playbook = "provisioning/ansible/plays/play-with-fire.yml"
