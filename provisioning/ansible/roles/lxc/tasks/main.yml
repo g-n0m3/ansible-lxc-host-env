@@ -1,6 +1,23 @@
 ---
-become: yes
-become_user: root
-tasks:
-  - name: install lxc and dependencies
-    command: apt-get install -yq lxc lxc-dev python-dev python2.7-dev
+
+- name: Ensure lxc is installed and current version
+    apt: name=lxc state=latest update_cache=yes
+    tags: lxc
+
+- name: Ensure lxc-dev is installed and current version
+    apt: name=lxc-dev state=latest
+    tags: lxc
+
+- name: Create container
+    lxc_container:
+    name: test-container
+    container_log: true
+    template: ubuntu
+    state: started
+    backing_store: overlayfs
+    template_options: --release trusty
+    clone_snapshot: true
+    clone_name: test-container-clone-snapshot
+    archive: true
+    archive_compression: gzip    
+          
