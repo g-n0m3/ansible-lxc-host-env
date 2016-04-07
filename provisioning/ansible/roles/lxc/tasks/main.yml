@@ -1,0 +1,6 @@
+---
+become: yes
+become_user: root
+tasks:
+  - name: install lxc and dependencies
+    command: apt-get install -yq lxc lxc-dev python-dev python2.7-dev

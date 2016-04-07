@@ -1,0 +1,9 @@
+[lxc_hosts]
+192.168.31.13
+
+[web_hosts]
+192.168.31.13
+
+[dbx_hosts]
+
+[mon_hosts]

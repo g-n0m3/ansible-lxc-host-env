@@ -1,0 +1,4 @@
+---
+
+- include: lxc_hosts.yml
+- include: web_hosts.yml

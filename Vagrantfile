@@ -29,9 +29,8 @@ Vagrant.configure(2) do |config|
   
   # Run Ansible from the Vagrant Host
   config.vm.provision "ansible" do |ansible|
-    
-    ansible.playbook = "provisioning/ansible/plays/play-with-lxc.yml"
-#   ansible.playbook = "provisioning/ansible/plays/play-with-ruby.yml"
-#   ansible.playbook = "provisioning/ansible/plays/play-with-fire.yml"
+    ansible.limit = "all"   # change ansibles default limit to include all hosts
+    ansible.verbose = "vvv" # spit out the specifics to help with troubleshooting in dev
+    ansible.playbook = "provisioning/ansible/plays/site.yml" # let the games begin
   end
 end
