@@ -1,0 +1,4 @@
+---
+
+- name: ensure postgres is installed
+  apt: name=postgresql state=present
