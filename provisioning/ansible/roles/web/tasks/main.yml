@@ -1,7 +1,16 @@
 ---
 
-  - name: ensure apache is at the latest version
-    apt: name=apache2 state=latest
+- name: Create a new container to house our web application, archive it
+  lxc_container:
+    name: staffdir-ruby-dev
+    container_log: true
+    template: ubuntu
+    state: started
+    backing_store: dir
+    template_options: --release trusty
+    archive: true
+    archive_compression: gzip
+
 
  # - name: write the apache config file
  #   template:

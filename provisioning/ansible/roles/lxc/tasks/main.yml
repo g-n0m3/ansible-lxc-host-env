@@ -1,11 +1,5 @@
 ---
 
-- name: Ensure we have the required packages
-  apt: name=python-pip state=present
-  tags: python
-
-- pip:  name=lxc-python2 state=present # requirement for 'lxc_containers' extras module
-  
 - name: Ensure lxc is installed and current version
   apt: name=lxc state=present
   tags: lxc
@@ -13,4 +7,15 @@
 - name: Ensure lxc-dev is installed and current version
   apt: name=lxc-dev state=present
   tags: lxc
+
+- name: Ensure we have the python2 headers present
+  apt: name=python2.7-dev state=present
+  tags: python
+  
+- name: Ensure we have pip installed
+  apt: name=python-pip state=present
+  tags: python
+
+# lxc-python2 must come after lxc-dev
+- pip:  name=lxc-python2 state=present # requirement for 'lxc_containers' extras module
 
