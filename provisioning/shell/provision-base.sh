@@ -10,4 +10,4 @@
 sudo apt-get update && sudo apt-get upgrade -yq
 # we want some config management capabilities, the ability to build stuff,
 # use git, containers, and all that entails
-sudo apt-get install -yq ansible
+sudo apt-get install -yq ansible 

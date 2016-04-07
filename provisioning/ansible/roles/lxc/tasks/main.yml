@@ -1,28 +1,16 @@
 ---
 
+- name: Ensure we have the required packages
+  apt: name=python-pip state=present
+  tags: python
+
+- pip:  name=lxc-python2 state=present # requirement for 'lxc_containers' extras module
+  
 - name: Ensure lxc is installed and current version
-  apt: name=lxc state=latest update_cache=yes
+  apt: name=lxc state=present
   tags: lxc
 
 - name: Ensure lxc-dev is installed and current version
-  apt: name=lxc-dev state=latest
+  apt: name=lxc-dev state=present
   tags: lxc
 
-- name: Ensure lxc python2 bindings included
-  git:
-    repo=https://github.com/lxc/python2-lxc.git
-    dest=/usr/local/src/
-  
-- name: Create container
-    lxc_container:
-    name: test-container
-    container_log: true
-    template: ubuntu
-    state: started
-    backing_store: overlayfs
-    template_options: --release trusty
-    clone_snapshot: true
-    clone_name: test-container-clone-snapshot
-    archive: true
-    archive_compression: gzip    
-          
