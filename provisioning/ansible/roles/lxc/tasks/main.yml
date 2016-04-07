@@ -1,13 +1,18 @@
 ---
 
 - name: Ensure lxc is installed and current version
-    apt: name=lxc state=latest update_cache=yes
-    tags: lxc
+  apt: name=lxc state=latest update_cache=yes
+  tags: lxc
 
 - name: Ensure lxc-dev is installed and current version
-    apt: name=lxc-dev state=latest
-    tags: lxc
+  apt: name=lxc-dev state=latest
+  tags: lxc
 
+- name: Ensure lxc python2 bindings included
+  git:
+    repo=https://github.com/lxc/python2-lxc.git
+    dest=/usr/local/src/
+  
 - name: Create container
     lxc_container:
     name: test-container
