@@ -19,8 +19,7 @@ Vagrant.configure(2) do |config|
   # Run Ansible from the Vagrant Host
   config.vm.provision "ansible" do |ansible|
     ansible.groups = {
-      "dbx_hosts" => ["db-[0:2]_dev"],
-      "lxc_hosts" => ["web-01_dev"],
+      "dbx_hosts" => ["db-01_dev"],
       "web_hosts" => ["web-01_dev"]
      }
     ansible.limit = "all"   # change ansibles default limit to include all hosts
