@@ -24,7 +24,8 @@ Vagrant.configure(2) do |config|
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
   config.vm.synced_folder ".", "/vagrant"
-
+  config.vm.synced_folder "config", "/etc/ansible/"
+  
   config.vm.provision "shell", path: "provisioning/shell/provision-base.sh"
   
   # Run Ansible from the Vagrant Host
