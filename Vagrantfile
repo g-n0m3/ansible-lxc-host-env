@@ -28,6 +28,7 @@ Vagrant.configure(2) do |config|
       "dbx_hosts" => ["dbx-01-dev"],
       "web_hosts" => ["web-01-dev"]
      }
+    ansible.inventory_path = "provisioning/ansible/inventory"
     ansible.limit = "all"   # change ansibles default limit to include all hosts
     ansible.verbose = "vvv" # spit out the specifics to help with troubleshooting in dev
     ansible.playbook = "provisioning/ansible/site.yml" # let the games begin

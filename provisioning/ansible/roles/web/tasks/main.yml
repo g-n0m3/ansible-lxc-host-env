@@ -2,7 +2,7 @@
 
 - name: Create a new container to house our web application, archive it
   lxc_container:
-    name: staffdir-ruby-dev
+    name: test-container-rvmrails-dev
     container_log: true
     template: ubuntu
     state: started
@@ -11,7 +11,8 @@
     archive: true
     archive_compression: gzip
 
-
+#- name: Install rvm on container
+      
  # - name: write the apache config file
  #   template:
  #     src=/srv/apache2.j2
