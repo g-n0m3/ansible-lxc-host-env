@@ -9,14 +9,11 @@ Vagrant.configure(2) do |config|
     web01.vm.hostname = "web-01-dev"
     web01.vm.network "private_network", ip: "192.168.169.170"
   end
-#  config.vm.define "web-01_tst"
-#  config.vm.define "web-01_pro"
+
   config.vm.define "dbx-01-dev" do |dbx01|
     dbx01.vm.hostname = "dbx-01-dev"
     dbx01.vm.network "private_network", ip: "192.168.169.171"
   end
-#  config.vm.define "dbx-01_tst"
-#  config.vm.define "dbx-01_pro"
 
   config.vm.synced_folder ".", "/vagrant"
    
